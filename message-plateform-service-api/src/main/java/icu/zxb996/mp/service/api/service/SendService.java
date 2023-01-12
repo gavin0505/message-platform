@@ -1,6 +1,7 @@
 package icu.zxb996.mp.service.api.service;
 
 import icu.zxb996.mp.common.vo.ResultVO;
+import icu.zxb996.mp.service.api.domain.SendRequest;
 
 /**
  * @author Gavin Zhang
@@ -8,6 +9,12 @@ import icu.zxb996.mp.common.vo.ResultVO;
  */
 public interface SendService {
 
-    ResultVO send();
+    /**
+     * 消息发送
+     *
+     * @param sendRequest 消息体
+     * @return 发送结果
+     */
+    ResultVO<String> send(SendRequest sendRequest);
 
 }
