@@ -9,18 +9,17 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>message-platform-service-api-impl</artifactId>
+    <artifactId>message-plateform-support</artifactId>
 
     <dependencies>
         <dependency>
-            <groupId>icu.zxb996</groupId>
-            <artifactId>message-plateform-service-api</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+            <version>3.5.2</version>
         </dependency>
         <dependency>
-            <groupId>icu.zxb996</groupId>
-            <artifactId>message-plateform-support</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
         </dependency>
     </dependencies>
 

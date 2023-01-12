@@ -19,6 +19,7 @@
         <module>message-plateform-service-api</module>
         <module>message-plateform-common</module>
         <module>message-platform-service-api-impl</module>
+        <module>message-plateform-support</module>
     </modules>
     <properties>
         <java.version>17</java.version>
