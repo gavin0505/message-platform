@@ -22,11 +22,11 @@ import java.io.Serializable;
 @ApiModel(value = "统一返回处理")
 public class ResultVO<T> implements Serializable {
 
-    private static final int CODE_SUCCESS = 200;
+    private static final String CODE_SUCCESS = "200";
 
-    private static final int CODE_ERROR = 500;
+    private static final String CODE_ERROR = "500";
 
-    private Integer code;
+    private String code;
 
     private String message;
 
@@ -48,14 +48,14 @@ public class ResultVO<T> implements Serializable {
         return result;
     }
 
-    public static <T> ResultVO<T> error(Integer code, String message) {
+    public static <T> ResultVO<T> error(String code, String message) {
         ResultVO<T> result = new ResultVO<>();
         result.code = code;
         result.message = message;
         return result;
     }
 
-    public static <T> ResultVO<T> error(Integer code, String message, T data) {
+    public static <T> ResultVO<T> error(String code, String message, T data) {
         ResultVO<T> result = new ResultVO<>();
         result.code = code;
         result.message = message;
