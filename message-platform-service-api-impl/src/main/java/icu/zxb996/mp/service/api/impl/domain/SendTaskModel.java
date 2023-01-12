@@ -3,6 +3,7 @@ package icu.zxb996.mp.service.api.impl.domain;
 import icu.zxb996.mp.common.domain.TaskInfo;
 import icu.zxb996.mp.service.api.domain.MessageParam;
 import icu.zxb996.mp.support.domain.MessageTemplate;
+import icu.zxb996.mp.support.pipeline.ProcessModel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -21,7 +22,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class SendTaskModel {
+public class SendTaskModel implements ProcessModel{
 
 
     /**
