@@ -1,4 +1,4 @@
-package icu.zxb996.mp.common.dto;
+package icu.zxb996.mp.common.dto.model;
 
 import java.io.Serializable;
 
