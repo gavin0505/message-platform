@@ -23,7 +23,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Accessors(chain = true)
-@TableName("antigen_data")
+@TableName("message_template")
 public class MessageTemplate implements Serializable {
 
     @TableId(type = IdType.AUTO)
