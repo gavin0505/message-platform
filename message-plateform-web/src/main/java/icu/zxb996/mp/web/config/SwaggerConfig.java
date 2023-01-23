@@ -38,8 +38,8 @@ public class SwaggerConfig {
      */
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("测试接口文档示例")
-                .description("zst")
+                .title("消息推送平台接口文档示例")
+                .description("mp")
                 // 版本号
                 .version("1.0.0")
                 // 联系人
