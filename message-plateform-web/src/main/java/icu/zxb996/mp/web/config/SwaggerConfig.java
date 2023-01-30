@@ -27,7 +27,7 @@ public class SwaggerConfig {
                 .apiInfo(this.apiInfo())
                 // 扫描 Controller 包路径，获得 API 接口
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("icu.zxb996.mp.controller"))
+                .apis(RequestHandlerSelectors.basePackage("icu.zxb996.mp.web.controller"))
                 .paths(PathSelectors.any())
                 // 构建出 Docket 对象
                 .build();
