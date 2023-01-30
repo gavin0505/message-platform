@@ -1,5 +1,6 @@
 package icu.zxb996.mp.common.enums;
 
+import icu.zxb996.mp.common.dto.model.ContentModel;
 import icu.zxb996.mp.common.dto.model.EmailContentModel;
 import icu.zxb996.mp.common.dto.model.SmsContentModel;
 import lombok.AllArgsConstructor;
@@ -52,7 +53,7 @@ public enum ChannelType {
     /**
      * 内容模型Class
      */
-    private final Class<?> contentModelClass;
+    private final Class<? extends ContentModel> contentModelClass;
 
     /**
      * 英文标识
@@ -65,7 +66,7 @@ public enum ChannelType {
      * @param code 状态码
      * @return 对应模型类
      */
-    public static Class<?> getChanelModelClassByCode(Integer code) {
+    public static Class<? extends ContentModel> getChanelModelClassByCode(Integer code) {
         ChannelType[] values = values();
         for (ChannelType value : values) {
             if (value.getCode().equals(code)) {
