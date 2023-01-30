@@ -130,12 +130,12 @@ public class MessageTemplate implements Serializable {
     /**
      * 创建时间 单位 s
      */
-    private Date created;
+    private Date createTime;
 
     /**
      * 更新时间 单位s
      */
-    private Date updated;
+    private Date updateTime;
 
     /**
      * 是否删除
