@@ -11,6 +11,19 @@
 
     <artifactId>message-platform-handler</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>icu.zxb996</groupId>
+            <artifactId>message-plateform-common</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>icu.zxb996</groupId>
+            <artifactId>message-plateform-support</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
+
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
