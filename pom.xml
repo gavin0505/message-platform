@@ -63,6 +63,13 @@
             <artifactId>log-record-starter</artifactId>
             <version>1.0.4.1</version>
         </dependency>
+
+        <!--动态线程池引入 nacos配置-->
+        <dependency>
+            <groupId>cn.dynamictp</groupId>
+            <artifactId>dynamic-tp-spring-cloud-starter-nacos</artifactId>
+            <version>1.0.9</version>
+        </dependency>
     </dependencies>
 
     <build>
