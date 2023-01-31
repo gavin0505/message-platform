@@ -14,11 +14,22 @@ import org.springframework.kafka.config.TopicBuilder;
 public class KafkaConfig {
 
     @Value("${mp.business.topic.name}")
-    private String topicName;
+    private String businessTopic;
+
+    @Value("${mp.business.log.topic.name}")
+    private String logTopic;
 
     @Bean
-    public NewTopic topic() {
-        return TopicBuilder.name(topicName)
+    public NewTopic businessTopic() {
+        return TopicBuilder.name(businessTopic)
+                .partitions(10)
+                .replicas(1)
+                .build();
+    }
+
+    @Bean
+    public NewTopic logTopic() {
+        return TopicBuilder.name(logTopic)
                 .partitions(10)
                 .replicas(1)
                 .build();
