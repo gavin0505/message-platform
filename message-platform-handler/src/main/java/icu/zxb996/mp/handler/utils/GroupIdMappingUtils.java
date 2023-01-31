@@ -19,6 +19,7 @@ public class GroupIdMappingUtils {
     /**
      * 获取所有的groupIds
      * (不同的渠道不同的消息类型拥有自己的groupId)
+     * 命名示例：email.notice, 代表：渠道为email的通知类消息
      */
     public static List<String> getAllGroupIds() {
         List<String> groupIds = new ArrayList<>();
