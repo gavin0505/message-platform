@@ -67,8 +67,14 @@
         <!--动态线程池引入 nacos配置-->
         <dependency>
             <groupId>cn.dynamictp</groupId>
-            <artifactId>dynamic-tp-spring-cloud-starter-nacos</artifactId>
+            <artifactId>dynamic-tp-spring-boot-starter-nacos</artifactId>
             <version>1.0.9</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>31.0.1-jre</version>
         </dependency>
     </dependencies>
 
