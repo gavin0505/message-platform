@@ -43,6 +43,11 @@ public class ThreadPoolExecutorShutdownDefinition implements ApplicationListener
     private final TimeUnit TIME_UNIT = TimeUnit.SECONDS;
 
 
+    /**
+     * 注册监听线程池
+     *
+     * @param executor 需要被监听的线程池
+     */
     public void registryExecutor(ExecutorService executor) {
         POOLS.add(executor);
     }
