@@ -80,3 +80,7 @@ mp:
     log:
       topic:
         name: mpTraceLog
+nacos:
+  config:
+    server-addr:
+      localhost:8848
