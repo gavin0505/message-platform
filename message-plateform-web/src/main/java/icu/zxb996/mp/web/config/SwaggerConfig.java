@@ -5,24 +5,24 @@ import org.springframework.context.annotation.Configuration;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
+import springfox.documentation.oas.annotations.EnableOpenApi;
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.service.Contact;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 /**
  * @author Gavin Zhang
  * @date 2023/1/10 19:36
  */
 @Configuration
-@EnableSwagger2
+@EnableOpenApi
 public class SwaggerConfig {
     @Bean
     public Docket createRestApi() {
         // 创建 Docket 对象
         // 文档类型，使用 Swagger2
-        return new Docket(DocumentationType.SWAGGER_2)
+        return new Docket(DocumentationType.OAS_30)
                 // 设置 API 信息
                 .apiInfo(this.apiInfo())
                 // 扫描 Controller 包路径，获得 API 接口
