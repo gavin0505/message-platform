@@ -85,8 +85,8 @@ public class ReceiverStart {
      * producer 将tag写进header里
      */
     @Bean
-    public ConcurrentKafkaListenerContainerFactory<String, String> filterContainerFactory(@Value("${austin.business.tagId.key}") String tagIdKey,
-                                                                                          @Value("${austin.business.tagId.value}") String tagIdValue) {
+    public ConcurrentKafkaListenerContainerFactory<String, String> filterContainerFactory(@Value("${mp.business.tagId.key}") String tagIdKey,
+                                                                                          @Value("${mp.business.tagId.value}") String tagIdValue) {
         ConcurrentKafkaListenerContainerFactory<String, String> factory = new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(consumerFactory);
         factory.setAckDiscarded(true);
