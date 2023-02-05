@@ -1,15 +1,19 @@
 package icu.zxb996.mp.handler.handler.impl;
 
 import icu.zxb996.mp.common.domain.TaskInfo;
+import icu.zxb996.mp.common.dto.model.EmailContentModel;
 import icu.zxb996.mp.common.enums.ChannelType;
 import icu.zxb996.mp.handler.handler.BaseHandler;
 import icu.zxb996.mp.support.domain.MessageTemplate;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.mail.SimpleMailMessage;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
 
 /**
  * @author Gavin Zhang
@@ -26,28 +30,34 @@ public class EmailHandler extends BaseHandler {
     @Resource
     private JavaMailSender javaMailSender;
 
-    //发送人
-    private String from = "gavin233@qq.com";
-    //接收人
-    private String to = "zxb_worky@163.com";
-    //标题
-    private String subject = "测试邮件";
-    //正文
-    private String context = "测试邮件正文内容";
+    @Value("${spring.mail.username}")
+    private String sender;
 
     @Override
     public boolean handler(TaskInfo taskInfo) {
-        SimpleMailMessage message = new SimpleMailMessage();
-        message.setFrom(from + "(zxb)");
-        message.setTo(to);
-        message.setSubject(subject);
-        message.setText(context);
-        javaMailSender.send(message);
-        return true;
+        try {
+            MimeMessage mimeMessage = getMimeMessage(taskInfo);
+            javaMailSender.send(mimeMessage);
+            return true;
+        } catch (MessagingException e) {
+            log.error("邮件发送失败");
+            return false;
+        }
+    }
+
+    private MimeMessage getMimeMessage(TaskInfo taskInfo) throws MessagingException {
+        MimeMessage mimeMessage = javaMailSender.createMimeMessage();
+        MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
+
+        EmailContentModel emailContentModel = (EmailContentModel) taskInfo.getContentModel();
+        mimeMessageHelper.setFrom(sender);
+        mimeMessageHelper.setTo(taskInfo.getReceiver().stream().toList().stream().toArray(String[]::new));
+        mimeMessageHelper.setSubject(emailContentModel.getTitle());
+        mimeMessageHelper.setText(emailContentModel.getContent());
+        return mimeMessage;
     }
 
     @Override
     public void recall(MessageTemplate messageTemplate) {
-
     }
 }
