@@ -22,7 +22,7 @@ public class KafkaConfig {
     @Bean
     public NewTopic businessTopic() {
         return TopicBuilder.name(businessTopic)
-                .partitions(10)
+                .partitions(1)
                 .replicas(1)
                 .build();
     }
@@ -30,7 +30,7 @@ public class KafkaConfig {
     @Bean
     public NewTopic logTopic() {
         return TopicBuilder.name(logTopic)
-                .partitions(10)
+                .partitions(1)
                 .replicas(1)
                 .build();
     }
