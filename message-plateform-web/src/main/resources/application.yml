@@ -111,3 +111,4 @@ nacos:
   config:
     server-addr:
       localhost:8848
+    namespace: fcd4f9e4-3d22-463e-b370-70032af286b9
