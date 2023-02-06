@@ -15,7 +15,7 @@ import java.nio.charset.StandardCharsets;
  * @author Gavin Zhang
  * @date 2023/2/6 15:23
  */
-@Service
+@Service("configServiceImpl")
 public class ConfigServiceImpl implements ConfigService {
 
     /**
