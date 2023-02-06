@@ -2,6 +2,7 @@ package icu.zxb996.mp.handler.pending;
 
 import cn.hutool.core.collection.CollUtil;
 import icu.zxb996.mp.common.domain.TaskInfo;
+import icu.zxb996.mp.handler.discard.DiscardMessageService;
 import icu.zxb996.mp.handler.handler.HandlerHolder;
 import lombok.Data;
 import lombok.experimental.Accessors;
@@ -26,6 +27,8 @@ import javax.annotation.Resource;
 @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 public class Task implements Runnable {
 
+    @Resource(name = "discardMessageService")
+    private DiscardMessageService discardMessageService;
     @Resource
     private HandlerHolder handlerHolder;
     private TaskInfo taskInfo;
@@ -34,6 +37,9 @@ public class Task implements Runnable {
     public void run() {
 
         // 1. 丢弃消息
+        if (discardMessageService.isDiscard(taskInfo)) {
+            return;
+        }
         // 2. 屏蔽消息
         // 3. 平台通用去重
         // 4. 发送消息
