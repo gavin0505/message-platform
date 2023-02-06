@@ -98,6 +98,15 @@ mp:
     log:
       topic:
         name: mpTraceLog
+  # nacos工具类配置
+  nacos:
+    enabled: false
+    server: localhost:8848
+    username: Nacos
+    password: Nacos
+    group: DEFAULT_GROUP
+    dataId: mp
+    namespace: fcd4f9e4-3d22-463e-b370-70032af286b9
 nacos:
   config:
     server-addr:
