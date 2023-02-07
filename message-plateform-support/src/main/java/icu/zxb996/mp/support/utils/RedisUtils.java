@@ -27,7 +27,7 @@ import java.util.Objects;
 public class RedisUtils {
 
 
-    @Resource
+    @Resource(name = "stringRedisTemplate")
     private StringRedisTemplate redisTemplate;
 
     /**
