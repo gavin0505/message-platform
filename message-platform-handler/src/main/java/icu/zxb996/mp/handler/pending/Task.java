@@ -4,6 +4,7 @@ import cn.hutool.core.collection.CollUtil;
 import icu.zxb996.mp.common.domain.TaskInfo;
 import icu.zxb996.mp.handler.discard.DiscardMessageService;
 import icu.zxb996.mp.handler.handler.HandlerHolder;
+import icu.zxb996.mp.handler.handler.shield.ShieldService;
 import lombok.Data;
 import lombok.experimental.Accessors;
 import lombok.extern.slf4j.Slf4j;
@@ -29,6 +30,10 @@ public class Task implements Runnable {
 
     @Resource(name = "discardMessageService")
     private DiscardMessageService discardMessageService;
+
+    @Resource(name = "shieldServiceImpl")
+    private ShieldService shieldService;
+
     @Resource
     private HandlerHolder handlerHolder;
     private TaskInfo taskInfo;
@@ -40,7 +45,10 @@ public class Task implements Runnable {
         if (discardMessageService.isDiscard(taskInfo)) {
             return;
         }
+
         // 2. 屏蔽消息
+        shieldService.shield(taskInfo);
+
         // 3. 平台通用去重
         // 4. 发送消息
         if (CollUtil.isNotEmpty(taskInfo.getReceiver())) {
