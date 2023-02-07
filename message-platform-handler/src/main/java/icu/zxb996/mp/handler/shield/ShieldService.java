@@ -1,4 +1,4 @@
-package icu.zxb996.mp.handler.handler.shield;
+package icu.zxb996.mp.handler.shield;
 
 import icu.zxb996.mp.common.domain.TaskInfo;
 

@@ -4,7 +4,7 @@ import cn.hutool.core.collection.CollUtil;
 import icu.zxb996.mp.common.domain.TaskInfo;
 import icu.zxb996.mp.handler.discard.DiscardMessageService;
 import icu.zxb996.mp.handler.handler.HandlerHolder;
-import icu.zxb996.mp.handler.handler.shield.ShieldService;
+import icu.zxb996.mp.handler.shield.ShieldService;
 import lombok.Data;
 import lombok.experimental.Accessors;
 import lombok.extern.slf4j.Slf4j;

@@ -1,4 +1,4 @@
-package icu.zxb996.mp.handler.handler.shield.impl;
+package icu.zxb996.mp.handler.shield.impl;
 
 import cn.hutool.core.date.DateUtil;
 import com.alibaba.fastjson.JSON;
@@ -7,7 +7,7 @@ import icu.zxb996.mp.common.domain.AnchorInfo;
 import icu.zxb996.mp.common.domain.TaskInfo;
 import icu.zxb996.mp.common.enums.AnchorState;
 import icu.zxb996.mp.common.enums.ShieldType;
-import icu.zxb996.mp.handler.handler.shield.ShieldService;
+import icu.zxb996.mp.handler.shield.ShieldService;
 import icu.zxb996.mp.support.utils.LogUtils;
 import icu.zxb996.mp.support.utils.RedisUtils;
 import org.springframework.stereotype.Service;
