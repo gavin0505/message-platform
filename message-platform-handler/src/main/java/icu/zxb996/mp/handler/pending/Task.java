@@ -2,6 +2,7 @@ package icu.zxb996.mp.handler.pending;
 
 import cn.hutool.core.collection.CollUtil;
 import icu.zxb996.mp.common.domain.TaskInfo;
+import icu.zxb996.mp.handler.deduplication.DeduplicationRuleService;
 import icu.zxb996.mp.handler.discard.DiscardMessageService;
 import icu.zxb996.mp.handler.handler.HandlerHolder;
 import icu.zxb996.mp.handler.shield.ShieldService;
@@ -35,6 +36,10 @@ public class Task implements Runnable {
     private ShieldService shieldService;
 
     @Resource
+    private DeduplicationRuleService deduplicationRuleService;
+
+
+    @Resource
     private HandlerHolder handlerHolder;
     private TaskInfo taskInfo;
 
@@ -49,7 +54,11 @@ public class Task implements Runnable {
         // 2. 屏蔽消息
         shieldService.shield(taskInfo);
 
-        // 3. 平台通用去重
+        // 3.平台通用去重
+        if (CollUtil.isNotEmpty(taskInfo.getReceiver())) {
+            deduplicationRuleService.duplication(taskInfo);
+        }
+
         // 4. 发送消息
         if (CollUtil.isNotEmpty(taskInfo.getReceiver())) {
             handlerHolder.route(taskInfo.getSendChannel()).doHandler(taskInfo);
