@@ -17,7 +17,7 @@ public interface Builder {
     /**
      * 根据配置构建去重参数
      *
-     * @param deduplication
+     * @param deduplication 去重配置信息
      * @param taskInfo      消息体
      * @return 去重参数
      */
