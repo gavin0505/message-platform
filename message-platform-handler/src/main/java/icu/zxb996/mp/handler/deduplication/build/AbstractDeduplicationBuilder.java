@@ -17,6 +17,9 @@ import java.util.Objects;
  */
 public abstract class AbstractDeduplicationBuilder implements Builder {
 
+    /**
+     * 去重状态
+     */
     protected Integer deduplicationType;
 
     @Resource(name = "deduplicationHolder")
@@ -27,6 +30,14 @@ public abstract class AbstractDeduplicationBuilder implements Builder {
         deduplicationHolder.putBuilder(deduplicationType, this);
     }
 
+    /**
+     * 通过去重配置信息获取去重参数
+     *
+     * @param key               去重状态
+     * @param duplicationConfig 去重配置信息
+     * @param taskInfo          消息体
+     * @return 去重参数
+     */
     public DeduplicationParam getParamsFromConfig(Integer key, String duplicationConfig, TaskInfo taskInfo) {
         JSONObject object = JSONObject.parseObject(duplicationConfig);
         if (Objects.isNull(object)) {
