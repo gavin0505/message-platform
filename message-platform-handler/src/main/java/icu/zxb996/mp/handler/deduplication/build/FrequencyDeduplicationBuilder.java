@@ -5,6 +5,7 @@ import icu.zxb996.mp.common.domain.TaskInfo;
 import icu.zxb996.mp.common.enums.AnchorState;
 import icu.zxb996.mp.common.enums.DeduplicationType;
 import icu.zxb996.mp.handler.deduplication.DeduplicationParam;
+import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.Objects;
@@ -15,6 +16,7 @@ import java.util.Objects;
  * @author Gavin Zhang
  * @date 2023/2/11 15:22
  */
+@Service
 public class FrequencyDeduplicationBuilder extends AbstractDeduplicationBuilder {
 
     public FrequencyDeduplicationBuilder() {
