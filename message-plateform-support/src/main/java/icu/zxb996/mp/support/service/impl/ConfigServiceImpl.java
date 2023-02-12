@@ -3,10 +3,10 @@ package icu.zxb996.mp.support.service.impl;
 import cn.hutool.setting.dialect.Props;
 import icu.zxb996.mp.support.service.ConfigService;
 import icu.zxb996.mp.support.utils.NacosUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.nio.charset.StandardCharsets;
 
 /**
@@ -29,7 +29,8 @@ public class ConfigServiceImpl implements ConfigService {
      */
     @Value("${mp.nacos.enabled}")
     private Boolean enableNacos;
-    @Autowired
+
+    @Resource
     private NacosUtils nacosUtils;
 
     @Override
