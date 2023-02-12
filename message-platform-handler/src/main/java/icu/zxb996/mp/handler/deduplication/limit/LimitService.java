@@ -16,6 +16,8 @@ public interface LimitService {
 
     /**
      * 去重限制
+     * <p/>
+     * 限制条件：在X时间段内是否达到Y阈值
      *
      * @param service  去重器对象
      * @param taskInfo 消息体
