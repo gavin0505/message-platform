@@ -80,6 +80,8 @@ logging:
 
 # 项目配置
 mp:
+  enabled:
+    nacos: false
   mq:
     pipeline: kafka
   business:
