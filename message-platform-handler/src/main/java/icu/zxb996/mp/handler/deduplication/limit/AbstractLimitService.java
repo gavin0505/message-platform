@@ -14,7 +14,6 @@ import java.util.List;
  */
 public abstract class AbstractLimitService implements LimitService {
 
-
     /**
      * 获取得到当前消息模板所有的去重Key
      *
@@ -30,10 +29,15 @@ public abstract class AbstractLimitService implements LimitService {
         return result;
     }
 
-
+    /**
+     * 调用去重服务的方法，构建去重key
+     *
+     * @param service  去重服务
+     * @param taskInfo 消息体
+     * @param receiver 接收者
+     * @return 去重key
+     */
     protected String deduplicationSingleKey(AbstractDeduplicationService service, TaskInfo taskInfo, String receiver) {
-
         return service.deduplicationSingleKey(taskInfo, receiver);
-
     }
 }
