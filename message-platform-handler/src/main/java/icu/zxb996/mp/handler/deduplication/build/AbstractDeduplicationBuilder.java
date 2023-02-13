@@ -10,7 +10,7 @@ import javax.annotation.Resource;
 import java.util.Objects;
 
 /**
- * 抽象去重构造器模板
+ * 抽象去重参数构造器模板
  *
  * @author Gavin Zhang
  * @date 2023/2/7 17:39
