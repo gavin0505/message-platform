@@ -40,7 +40,7 @@ public class DeduplicationRuleService {
         List<Integer> deduplicationList = DeduplicationType.getDeduplicationList();
 
         for (Integer deduplicationType : deduplicationList) {
-            // 2. 通过配置样例和消息体的信息，构建去重参数
+            // 2. 通过配置样例和消息体的信息，构建去重参数类
             DeduplicationParam deduplicationParam = deduplicationHolder.selectBuilder(deduplicationType).build(deduplicationConfig, taskInfo);
             // 3. 若去重参数不为空，执行去重
             if (Objects.nonNull(deduplicationParam)) {

@@ -11,7 +11,7 @@ import java.util.Date;
 import java.util.Objects;
 
 /**
- * 消息频率去重构造器
+ * 消息频率去重参数构造器
  *
  * @author Gavin Zhang
  * @date 2023/2/11 15:22

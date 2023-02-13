@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.Objects;
 
 /**
- * 消息内容去重构造器
+ * 消息内容去重参数构造器
  *
  * @author Gavin Zhang
  * @date 2023/2/11 15:13
