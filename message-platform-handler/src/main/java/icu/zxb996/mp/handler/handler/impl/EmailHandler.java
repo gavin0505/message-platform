@@ -1,8 +1,11 @@
 package icu.zxb996.mp.handler.handler.impl;
 
+import com.google.common.util.concurrent.RateLimiter;
 import icu.zxb996.mp.common.domain.TaskInfo;
 import icu.zxb996.mp.common.dto.model.EmailContentModel;
 import icu.zxb996.mp.common.enums.ChannelType;
+import icu.zxb996.mp.handler.enums.RateLimitStrategy;
+import icu.zxb996.mp.handler.flowcontrol.FlowControlParam;
 import icu.zxb996.mp.handler.handler.BaseHandler;
 import icu.zxb996.mp.support.domain.MessageTemplate;
 import lombok.extern.slf4j.Slf4j;
@@ -25,6 +28,12 @@ public class EmailHandler extends BaseHandler {
 
     public EmailHandler() {
         channelCode = ChannelType.EMAIL.getCode();
+
+        // 按照请求限流，默认单机 3 qps （具体数值配置在nacos动态调整)
+        Double rateInitValue = Double.valueOf(3);
+        flowControlParam = FlowControlParam.builder().rateInitValue(rateInitValue)
+                .rateLimitStrategy(RateLimitStrategy.REQUEST_RATE_LIMIT)
+                .rateLimiter(RateLimiter.create(rateInitValue)).build();
     }
 
     @Resource
@@ -51,7 +60,7 @@ public class EmailHandler extends BaseHandler {
 
         EmailContentModel emailContentModel = (EmailContentModel) taskInfo.getContentModel();
         mimeMessageHelper.setFrom(sender);
-        mimeMessageHelper.setTo(taskInfo.getReceiver().stream().toList().stream().toArray(String[]::new));
+        mimeMessageHelper.setTo(taskInfo.getReceiver().toArray(String[]::new));
         mimeMessageHelper.setSubject(emailContentModel.getTitle());
         mimeMessageHelper.setText(emailContentModel.getContent());
         return mimeMessage;
