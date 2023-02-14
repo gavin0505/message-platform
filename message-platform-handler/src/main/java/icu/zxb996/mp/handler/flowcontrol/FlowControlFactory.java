@@ -59,6 +59,8 @@ public class FlowControlFactory implements ApplicationContextAware {
             flowControlParam.setRateInitValue(rateLimitConfig);
             flowControlParam.setRateLimiter(rateLimiter);
         }
+
+        // 根据限流类型找到对应限流服务
         FlowControlService flowControlService = flowControlServiceMap.get(flowControlParam.getRateLimitStrategy());
         if (Objects.isNull(flowControlService)) {
             log.error("没有找到对应的单机限流策略");
@@ -74,9 +76,9 @@ public class FlowControlFactory implements ApplicationContextAware {
     /**
      * 得到限流值的配置
      * <p>
-     * apollo配置样例     key：flowControl value：{"flow_control_40":1}
+     * nacos配置样例     key：flowControl value：{"flow_control_40":1}
      * <p>
-     * 渠道枚举可看：com.java3y.austin.common.enums.ChannelType
+     * 渠道枚举可看：icu.zxb996.mp.common.enums.ChannelType
      *
      * @param channelCode
      */
