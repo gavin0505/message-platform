@@ -1,5 +1,6 @@
 package icu.zxb996.mp.handler.deduplication.service;
 
+import cn.hutool.core.util.StrUtil;
 import icu.zxb996.mp.common.domain.TaskInfo;
 import icu.zxb996.mp.common.enums.DeduplicationType;
 import icu.zxb996.mp.handler.deduplication.limit.LimitService;
@@ -22,8 +23,24 @@ public class FrequencyDeduplicationService extends AbstractDeduplicationService 
         deduplicationType = DeduplicationType.FREQUENCY.getCode();
     }
 
+    private static final String PREFIX = "FRE";
+
+    /**
+     * 业务规则去重 构建key
+     * <p>
+     * key ： receiver + templateId + sendChannel
+     * <p>
+     * 一天内一个用户只能收到某个渠道的消息 N 次
+     *
+     * @param taskInfo 消息体
+     * @param receiver 接收者
+     * @return 对应Key
+     */
     @Override
     public String deduplicationSingleKey(TaskInfo taskInfo, String receiver) {
-        return null;
+        return PREFIX + StrUtil.C_UNDERLINE
+                + receiver + StrUtil.C_UNDERLINE
+                + taskInfo.getMessageTemplateId() + StrUtil.C_UNDERLINE
+                + taskInfo.getSendChannel();
     }
 }
