@@ -72,6 +72,13 @@
             <artifactId>nacos-config-spring-boot-starter</artifactId>
             <version>0.2.12</version>
         </dependency>
+
+        <!--graylog-->
+        <dependency>
+            <groupId>de.siegmar</groupId>
+            <artifactId>logback-gelf</artifactId>
+            <version>3.0.0</version>
+        </dependency>
     </dependencies>
 
     <build>
