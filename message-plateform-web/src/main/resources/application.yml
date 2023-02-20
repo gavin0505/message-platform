@@ -12,7 +12,7 @@ spring:
     # 发送者邮箱
     username: gavin233@qq.com
     # 配置密码，注意不是真正的密码，而是刚刚申请到的授权码
-    password: szgqclugykdudhdh
+    password: nhzfqqablpfrffdd
     # 端口号465或587
     port: 587
     # 默认的邮件编码为UTF-8
@@ -27,9 +27,26 @@ spring:
 
   # 配置Kafka
   kafka:
+    bootstrap-servers: ${mp.kafka.ip}:${mp.kafka.port}
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      # 128kb
+      batch-size: 131072
+      # 64M
+      buffer-memory: 67108864
+      # max-request-size: 5242880
+      # linger-ms: 5
+      retries: 1
+      acks: 0
+      # 提升性能很重要
+      compression-type: gzip
+      properties:
+        # 5M
+        max.request.size: 5242880
+        linger.ms: 5
     consumer:
       -auto-offset-reset: earliest
-      bootstrap-servers: ${mp.kafka.ip}:${mp.kafka.port}
       enable-auto-commit: true
       auto-commit-interval: 3000
 
