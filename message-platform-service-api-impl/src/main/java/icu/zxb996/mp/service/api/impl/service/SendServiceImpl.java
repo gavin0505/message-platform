@@ -1,5 +1,6 @@
 package icu.zxb996.mp.service.api.impl.service;
 
+import cn.monitor4all.logRecord.annotation.OperationLog;
 import icu.zxb996.mp.common.vo.ResultVO;
 import icu.zxb996.mp.service.api.domain.SendRequest;
 import icu.zxb996.mp.service.api.impl.domain.SendTaskModel;
@@ -22,6 +23,7 @@ public class SendServiceImpl implements SendService {
     private ProcessController processController;
 
     @Override
+    @OperationLog(bizType = "SendService#send", bizId = "#sendRequest.messageTemplateId", msg = "#sendRequest")
     public ResultVO<String> send(SendRequest sendRequest) {
 
         // 组装发送消息信息任务模型
