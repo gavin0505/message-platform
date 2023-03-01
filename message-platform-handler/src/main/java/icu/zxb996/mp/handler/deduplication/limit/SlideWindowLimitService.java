@@ -44,7 +44,7 @@ public class SlideWindowLimitService extends AbstractLimitService {
      * @param service  去重器对象
      * @param taskInfo 消息体
      * @param param    去重参数
-     * @return 返回不符合条件的手机号码
+     * @return 返回要被去重的用户
      */
     @Override
     public Set<String> limitFilter(AbstractDeduplicationService service, TaskInfo taskInfo, DeduplicationParam param) {
