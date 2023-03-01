@@ -1,6 +1,12 @@
 package icu.zxb996.mp.handler.handler.impl;
 
+import cn.hutool.extra.mail.MailAccount;
+import cn.hutool.extra.mail.MailUtil;
+import com.alibaba.fastjson.JSONObject;
+import com.google.common.base.Throwables;
 import com.google.common.util.concurrent.RateLimiter;
+import com.sun.mail.util.MailSSLSocketFactory;
+import icu.zxb996.mp.common.constant.CommonConstant;
 import icu.zxb996.mp.common.domain.TaskInfo;
 import icu.zxb996.mp.common.dto.model.EmailContentModel;
 import icu.zxb996.mp.common.enums.ChannelType;
@@ -8,15 +14,13 @@ import icu.zxb996.mp.handler.enums.RateLimitStrategy;
 import icu.zxb996.mp.handler.flowcontrol.FlowControlParam;
 import icu.zxb996.mp.handler.handler.BaseHandler;
 import icu.zxb996.mp.support.domain.MessageTemplate;
+import icu.zxb996.mp.support.service.ConfigService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
-import javax.mail.MessagingException;
-import javax.mail.internet.MimeMessage;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Gavin Zhang
@@ -25,6 +29,9 @@ import javax.mail.internet.MimeMessage;
 @Component
 @Slf4j
 public class EmailHandler extends BaseHandler {
+
+    @Resource(name = "configServiceImpl")
+    private ConfigService configService;
 
     public EmailHandler() {
         channelCode = ChannelType.EMAIL.getCode();
@@ -36,34 +43,45 @@ public class EmailHandler extends BaseHandler {
                 .rateLimiter(RateLimiter.create(rateInitValue)).build();
     }
 
-    @Resource
-    private JavaMailSender javaMailSender;
-
-    @Value("${spring.mail.username}")
-    private String sender;
-
     @Override
     public boolean handler(TaskInfo taskInfo) {
-        try {
-            MimeMessage mimeMessage = getMimeMessage(taskInfo);
-            javaMailSender.send(mimeMessage);
-            return true;
-        } catch (MessagingException e) {
-            log.error("邮件发送失败");
-            return false;
-        }
-    }
-
-    private MimeMessage getMimeMessage(TaskInfo taskInfo) throws MessagingException {
-        MimeMessage mimeMessage = javaMailSender.createMimeMessage();
-        MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
 
         EmailContentModel emailContentModel = (EmailContentModel) taskInfo.getContentModel();
-        mimeMessageHelper.setFrom(sender);
-        mimeMessageHelper.setTo(taskInfo.getReceiver().toArray(String[]::new));
-        mimeMessageHelper.setSubject(emailContentModel.getTitle());
-        mimeMessageHelper.setText(emailContentModel.getContent());
-        return mimeMessage;
+
+        // 获取发件邮箱配置
+        MailAccount account = getAccountConfig();
+
+        List<String> tos = new ArrayList<>(taskInfo.getReceiver());
+
+        // 真正发送邮件
+        MailUtil.send(account, tos, emailContentModel.getTitle(), emailContentModel.getContent(), true);
+
+        return true;
+    }
+
+    /**
+     * 获取邮箱账号配置
+     *
+     * @return 邮箱账号配置
+     */
+    private MailAccount getAccountConfig() {
+
+        // 解析邮箱配置
+        String config = configService.getProperty("emailAccount", CommonConstant.EMPTY_JSON_OBJECT);
+        JSONObject object = JSONObject.parseObject(config);
+
+        // 转换为固定account格式
+        MailAccount account = JSONObject.toJavaObject(object, MailAccount.class);
+
+        try {
+            MailSSLSocketFactory sf = new MailSSLSocketFactory();
+            sf.setTrustAllHosts(true);
+            account.setAuth(account.isAuth()).setStarttlsEnable(account.isStarttlsEnable()).setSslEnable(account.isSslEnable()).setCustomProperty("mail.smtp.ssl.socketFactory", sf);
+            account.setTimeout(25000).setConnectionTimeout(25000);
+        } catch (Exception e) {
+            log.error("EmailHandler#getAccount fail!{}", Throwables.getStackTraceAsString(e));
+        }
+        return account;
     }
 
     @Override
