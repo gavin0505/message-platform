@@ -31,6 +31,11 @@
             <artifactId>message-platform-handler</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>icu.zxb996</groupId>
+            <artifactId>message-platform-collection</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 
     <properties>

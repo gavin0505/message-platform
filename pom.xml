@@ -22,6 +22,7 @@
         <module>message-plateform-support</module>
         <module>message-platform-handler</module>
         <module>message-platform-stream</module>
+        <module>message-platform-collection</module>
     </modules>
     <properties>
         <java.version>17</java.version>
