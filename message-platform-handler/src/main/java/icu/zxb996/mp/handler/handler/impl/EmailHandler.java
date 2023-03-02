@@ -14,11 +14,9 @@ import icu.zxb996.mp.handler.enums.RateLimitStrategy;
 import icu.zxb996.mp.handler.flowcontrol.FlowControlParam;
 import icu.zxb996.mp.handler.handler.BaseHandler;
 import icu.zxb996.mp.support.domain.MessageTemplate;
-import icu.zxb996.mp.support.service.ConfigService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,9 +27,6 @@ import java.util.List;
 @Component
 @Slf4j
 public class EmailHandler extends BaseHandler {
-
-    @Resource(name = "configServiceImpl")
-    private ConfigService configService;
 
     public EmailHandler() {
         channelCode = ChannelType.EMAIL.getCode();

@@ -5,6 +5,7 @@ import icu.zxb996.mp.common.domain.TaskInfo;
 import icu.zxb996.mp.common.enums.AnchorState;
 import icu.zxb996.mp.handler.flowcontrol.FlowControlFactory;
 import icu.zxb996.mp.handler.flowcontrol.FlowControlParam;
+import icu.zxb996.mp.support.service.ConfigService;
 import icu.zxb996.mp.support.utils.LogUtils;
 
 import javax.annotation.PostConstruct;
@@ -18,6 +19,9 @@ import java.util.Objects;
  * @date 2023/2/1 16:26
  */
 public abstract class BaseHandler implements Handler {
+
+    @Resource(name = "configServiceImpl")
+    protected ConfigService configService;
 
     @Resource
     private HandlerHolder handlerHolder;
