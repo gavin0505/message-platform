@@ -21,7 +21,6 @@
         <module>message-platform-service-api-impl</module>
         <module>message-plateform-support</module>
         <module>message-platform-handler</module>
-        <module>message-platform-stream</module>
         <module>message-platform-collection</module>
     </modules>
     <properties>

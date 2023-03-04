@@ -106,7 +106,7 @@ mp:
         name: mpTraceLog
   # nacos工具类配置
   nacos:
-    enabled: false
+    enabled: true
     server: localhost:8848
     username: Nacos
     password: Nacos
